@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Red Wine Quality Predictor</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Red Wine Quality Predictor">
+  <meta name="author" content="Farshid Mahdavipour">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Red Wine Quality Predictor</h1>
+    <h2>Professionaly determine the quality of your red wine with analyzing ingredients</h2>
+    <p>Farshid Mahdavipour<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Wine Making Competition</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This is always a professional task to taste wine and 
+give feedbacks to winemakers. 
+Many factors are included ine the ratings, but it is a good idea for winerys
+to have a prediction on their wine quality before participating in competitions! </p>
+
+<h4>Wine Quality Dataset</h4>
+
+<p>There is a wine quality dataset, developed from the north of Portugal. The goal is to model wine quality based on physicochemical tests.
+you can download the original dataset from the UCI Machine Learning Database.
+<a href="https://archive.ics.uci.edu/ml/datasets/Wine+Quality">https://archive.ics.uci.edu/ml/datasets/Wine+Quality</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Downloading Dataset</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>First of all, we will download the dataset, create the dataframe and running correlations between the all wine features, three characteristics has been selected for the prediction formula</p>
+
+<pre><code class="r">winedata &lt;- read.csv(&quot;http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&quot;,sep=&quot;;&quot;)
+cor(winedata)
+</code></pre>
+
+<p>P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis. 
+Modeling wine preferences by data mining from physicochemical properties. In Decision Support Systems, Elsevier, 47(4):547-553, 2009.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Prediction Algorithm</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The predicting function is a simple linear regression based on the Alcohol content, vlatile acidity and residual sugar. </p>
+
+<pre><code class="r">fit &lt;- lm(quality~alcohol+volatile.acidity+residual.sugar,data=winedata)
+print(fit$coef)
+</code></pre>
+
+<pre><code>##      (Intercept)          alcohol volatile.acidity   residual.sugar 
+##      3.098825118      0.313916847     -1.383483209     -0.001781068
+</code></pre>
+
+<p>so we come up with this formula for the prediction:</p>
+
+<p>winequality &lt;- 0.313917 * alcohol-1.383483 * volatile.acidity-0.001781 * residual.sugar </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>The web application</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The web application is deployed to shiny servers at this location:
+<a href="http://farchide.shinyapps.io/shiny">http://farchide.shinyapps.io/shiny</a></p>
+
+<p><img src="http://www.statestreetwineryredlands.com/webftp/u14/pictures/glass-of-red-wine.jpg" /></p>
+
+<p>You can play around and check the quality of your home made wine professionaly!</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Wine Making Competition'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Downloading Dataset'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Prediction Algorithm'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='The web application'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+   
+  </html>
